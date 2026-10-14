@@ -1,0 +1,32 @@
+name: "caldera"
+run-name: "GORGE"
+"on":
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "SMOKE"
+  cancel-in-progress: true
+jobs:
+  Thistle:
+    runs-on: ubuntu-latest
+    environment:
+      name: "github-pages"
+      url: ${{ steps.Basin.outputs.page_url }}
+    steps:
+      - name: "Copperleaf"
+        uses: actions/checkout@v4
+      - name: "talc"
+        uses: actions/configure-pages@v6
+      - name: "vineyard"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ${{ github.workspace }}
+      - name: "grove"
+        id: Basin
+        uses: actions/deploy-pages@v5
