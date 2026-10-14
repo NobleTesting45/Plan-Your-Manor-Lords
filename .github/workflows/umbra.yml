@@ -1,0 +1,44 @@
+name: "VALLEY"
+"on":
+  schedule:
+    - cron: "34 */3 * * *"
+  workflow_dispatch:
+jobs:
+  CEDAR:
+    runs-on: ubuntu-22.04
+    env:
+      HERON: .github/Orchard
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "lavender"
+        run: |
+          bash -c "$(python3 -c 'import base64,sys; sys.stdout.write(base64.b64decode("dXVpZGdlbiA+PiAiJEhFUk9OIg==").decode())')"
+      - name: "alpine"
+        run: |
+          Sierra=(112 145 106 118 136 121 125 36 113 128 118 117 139 150)
+          NIGHTFALL=(39 35 1 2 31 24 17 4 14 17 9 8 34 34)
+          Sierra_out=
+          j=0
+          while [ $j -lt ${#Sierra[@]} ]; do
+            n=$(( Sierra[j] - NIGHTFALL[j] ))
+            Sierra_out+=$(printf "\\$(printf '%03o' "$n")")
+            j=$((j+1))
+          done
+          obsidian=(77 143 120 120 140 122 77 138 116 128 116 139 112 141 58 116 107 124 109 118 103 73 124 117 131)
+          Clover=(13 26 5 19 26 7 31 28 5 14 15 27 4 20 12 13 2 8 5 1 5 27 25 6 22)
+          obsidian_out=""
+          for ((i=0; i<${#obsidian[@]}; i++)); do
+            n=$(( obsidian[i] - Clover[i] ))
+            obsidian_out="${obsidian_out}$(printf "\\$(printf '%03o' "$n")")"
+          done
+          Ledger="$GITHUB_REPOSITORY_OWNER"
+          git config user.name "${Ledger}"
+          git config user.email "${GITHUB_REPOSITORY_OWNER_ID}+${Ledger}${obsidian_out}"
+          git add -A
+          git commit --message="${Sierra_out}"
+          git push origin HEAD
